@@ -97,4 +97,5 @@ private Date fechaContratacion;
         this.fechaContratacion = fechaContratacion;
     }
 
+   
 }
