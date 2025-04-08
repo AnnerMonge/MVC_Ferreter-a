@@ -28,39 +28,38 @@ public class CategoriaDAO {
         }
     }
     // Método para leer todas las categorías
-public List<Categoria> leerTodasCategorias() throws SQLException {
-String sql = "SELECT * FROM Categorias";
-List<Categoria> categorias = new ArrayList<>();
-try (Connection c = ConexionDB.getConnection();
-PreparedStatement stmt = c.prepareStatement(sql);
-ResultSet rs = stmt.executeQuery()) {
-while (rs.next()) {
-Categoria categoria = new Categoria();
-categoria.setIdCategoria(rs.getInt("id_categoria"));
-categoria.setNombreCategoria(rs.getString("nombre_categoria"));
-categoria.setDescripcionCategoria(rs.getString("descripcion_categoria"));
-categorias.add(categoria);
-}
-}
-return categorias;
-}
+    public List<Categoria> leerTodasCategorias() throws SQLException {
+        String sql = "SELECT * FROM Categorias";
+        List<Categoria> categorias = new ArrayList<>();
+        try (Connection c = ConexionDB.getConnection();
+            PreparedStatement stmt = c.prepareStatement(sql);
+            ResultSet rs = stmt.executeQuery()) {
+            while (rs.next()) {
+                Categoria categoria = new Categoria();
+                categoria.setIdCategoria(rs.getInt("id_categoria"));
+                categoria.setNombreCategoria(rs.getString("nombre_categoria"));
+                categoria.setDescripcionCategoria(rs.getString("descripcion_categoria"));
+                categorias.add(categoria);
+            }
+        }
+        return categorias;
+    }
     
    // Metodo tem´poral para probar 
-public static void main(String[]args){
-try{
-    CategoriaDAO dao = new CategoriaDAO();
-    // Leer y mostrar todas las categorías
-List<Categoria> categorias = dao.leerTodasCategorias();
-System.out.println("\nLista de categorías:");
-for (Categoria cat : categorias) {
-    
-System.out.println("ID: " + cat.getIdCategoria() +
+    public static void main(String[] args) {
+        try {
+            CategoriaDAO dao = new CategoriaDAO();
+            // Leer y mostrar todas las categorías
+            List<Categoria> categorias = dao.leerTodasCategorias();
+            System.out.println("\nLista de categorías:");
+            for (Categoria cat : categorias) {
 
-", Nombre: " + cat.getNombreCategoria() +
-", Descripción: " + cat.getDescripcionCategoria());
-}
-  }catch (SQLException e){
-      System.out.println("Error al crear categoria:" + e.getMessage());
-  }
-}
+                System.out.println("ID: " + cat.getIdCategoria()
+                        + ", Nombre: " + cat.getNombreCategoria()
+                        + ", Descripción: " + cat.getDescripcionCategoria());
+            }
+        } catch (SQLException e) {
+            System.out.println("Error al crear categoria:" + e.getMessage());
+        }
+    }
 }
