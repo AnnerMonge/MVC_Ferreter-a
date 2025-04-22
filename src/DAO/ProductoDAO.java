@@ -106,10 +106,6 @@ public class ProductoDAO {
             dao.actualizarProducto(producto);
             System.out.println("Producto actualizado.");
 
-            // Eliminar un producto
-            dao.eliminarProducto(2); // ID a eliminar
-            System.out.println("Producto eliminado.");
-
             // Leer y mostrar todos los productos para verificar
             List<Producto> productos = dao.leerTodosProductos();
             System.out.println("Lista de productos:");

@@ -108,10 +108,6 @@ public class ClienteDAO {
             dao.actualizarCliente(cliente);
             System.out.println("Cliente actualizado.");
 
-            // Eliminar un cliente
-            dao.eliminarCliente(2); // ID a eliminar
-            System.out.println("Cliente eliminado.");
-
             // Leer y mostrar todos los clientes para verificar
             List<Cliente> clientes = dao.leerTodosClientes();
             System.out.println("Lista de clientes:");

@@ -78,10 +78,6 @@ public class CategoriaDAO {
             dao.actualizarCategoria(categoria);
             System.out.println("Categoría actualizada.");
 
-            // Eliminar una categoría
-            dao.eliminarCategoria(2); // ID a eliminar
-            System.out.println("Categoría eliminada.");
-
             // Leer y mostrar todas las categorías para verificar
             List<Categoria> categorias = dao.leerTodasCategorias();
             System.out.println("\nLista de categorías:");

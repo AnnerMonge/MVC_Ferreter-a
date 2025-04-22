@@ -112,10 +112,6 @@ public class EmpleadoDAO {
             dao.actualizarEmpleado(empleado);
             System.out.println("Empleado actualizado.");
 
-            // Eliminar un empleado
-            dao.eliminarEmpleado(2); // ID a eliminar
-            System.out.println("Empleado eliminado.");
-
             // Leer y mostrar todos los empleados para verificar
             List<Empleado> empleados = dao.leerTodosEmpleados();
             System.out.println("Lista de empleados:");
