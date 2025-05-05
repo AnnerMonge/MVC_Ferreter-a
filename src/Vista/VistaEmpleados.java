@@ -8,12 +8,12 @@ package Vista;
  *
  * @author COMPHP
  */
-public class VistaEmpleado extends javax.swing.JPanel {
+public class VistaEmpleados extends javax.swing.JPanel {
 
     /**
      * Creates new form VistaEmpleado
      */
-    public VistaEmpleado() {
+    public VistaEmpleados() {
         initComponents();
     }
 

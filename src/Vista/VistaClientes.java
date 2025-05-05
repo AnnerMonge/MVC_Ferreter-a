@@ -8,12 +8,12 @@ package Vista;
  *
  * @author COMPHP
  */
-public class VistaCliente extends javax.swing.JPanel {
+public class VistaClientes extends javax.swing.JPanel {
 
     /**
      * Creates new form VistaCliente
      */
-    public VistaCliente() {
+    public VistaClientes() {
         initComponents();
     }
 
@@ -289,7 +289,7 @@ public class VistaCliente extends javax.swing.JPanel {
     }//GEN-LAST:event_GuaradarActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-        // TODO add your handling code here:
+        // TODO add your handling code here:            
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void BuscarClienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarClienteActionPerformed
