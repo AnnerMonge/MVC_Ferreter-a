@@ -236,7 +236,8 @@ public class VistaCategorias extends javax.swing.JPanel {
             int idCategoria = (int) tablaCategorias.getValueAt(filaSelecionada, 0);
             categoriaControlador.eliminarCategoria(idCategoria);
             cargarDatosTabla();
-        } else {
+                    } else {
+
             javax.swing.JOptionPane.showMessageDialog(this, "Selecciona una fila para eliminar.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_accionBotonbtnEliminar
