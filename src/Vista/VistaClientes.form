@@ -24,36 +24,36 @@
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="primer_nombre" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="textprimer_nombre" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                       <Component id="jlabel1" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="segundo_nombre" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="textsegundo_nombre" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                       <Component id="jlabel2" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="primer_apellido" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="textprimer_apellido" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                       <Component id="jLabel3" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="jLabel4" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
-                                      <Component id="segundo_apellido" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="textsegundo_apellido" alignment="0" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="1" attributes="0">
-                                      <Component id="celular" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
+                                      <Component id="textcelular" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                       <Component id="jLabel5" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
-                                          <Component id="direccion" min="-2" pref="160" max="-2" attributes="0"/>
+                                          <Component id="textdireccion" min="-2" pref="160" max="-2" attributes="0"/>
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="cedula" min="-2" pref="160" max="-2" attributes="0"/>
+                                          <Component id="textcedula" min="-2" pref="160" max="-2" attributes="0"/>
                                       </Group>
                                       <Group type="102" alignment="0" attributes="0">
                                           <Component id="jLabel6" min="-2" pref="160" max="-2" attributes="0"/>
@@ -62,17 +62,17 @@
                                       </Group>
                                   </Group>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="Guaradar" min="-2" pref="120" max="-2" attributes="0"/>
+                                  <Component id="btnGuardar" min="-2" pref="120" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="BuscarCliente" min="-2" pref="353" max="-2" attributes="0"/>
+                              <Component id="textBuscarCliente" min="-2" pref="353" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="Buscar" min="-2" pref="120" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="Eliminar" min="-2" pref="119" max="-2" attributes="0"/>
+                              <Component id="btnEliminar" min="-2" pref="119" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="Actualizar" min="-2" pref="119" max="-2" attributes="0"/>
+                              <Component id="btnActualizar" min="-2" pref="119" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="0" pref="29" max="32767" attributes="0"/>
@@ -95,20 +95,20 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="primer_apellido" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="segundo_apellido" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="textprimer_apellido" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="textsegundo_apellido" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="103" alignment="0" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jlabel2" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="segundo_nombre" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="textsegundo_nombre" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="jlabel1" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="primer_nombre" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="textprimer_nombre" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -118,9 +118,9 @@
                       <Component id="jLabel5" min="-2" pref="30" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="celular" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="direccion" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="cedula" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="textcelular" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="textdireccion" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                          <Component id="textcedula" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                   <Group type="102" attributes="0">
@@ -132,15 +132,15 @@
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
-                      <Component id="Guaradar" min="-2" pref="30" max="-2" attributes="0"/>
+                      <Component id="btnGuardar" min="-2" pref="30" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="BuscarCliente" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="textBuscarCliente" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
                   <Component id="Buscar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="Eliminar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="Actualizar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="btnEliminar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                  <Component id="btnActualizar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Component id="jScrollPane1" min="-2" pref="205" max="-2" attributes="0"/>
@@ -155,9 +155,9 @@
         <Property name="text" type="java.lang.String" value=" primer_nombre"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="primer_nombre">
+    <Component class="javax.swing.JTextField" name="textprimer_nombre">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="primer_nombreActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textprimer_nombreActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jlabel2">
@@ -165,9 +165,9 @@
         <Property name="text" type="java.lang.String" value="segundo_nombre"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="segundo_nombre">
+    <Component class="javax.swing.JTextField" name="textsegundo_nombre">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="segundo_nombreActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textsegundo_nombreActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel3">
@@ -175,9 +175,9 @@
         <Property name="text" type="java.lang.String" value="primer_apellido"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="primer_apellido">
+    <Component class="javax.swing.JTextField" name="textprimer_apellido">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="primer_apellidoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textprimer_apellidoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel4">
@@ -185,9 +185,9 @@
         <Property name="text" type="java.lang.String" value="segundo_apellido"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="segundo_apellido">
+    <Component class="javax.swing.JTextField" name="textsegundo_apellido">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="segundo_apellidoActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textsegundo_apellidoActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel5">
@@ -195,9 +195,9 @@
         <Property name="text" type="java.lang.String" value="celular"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="celular">
+    <Component class="javax.swing.JTextField" name="textcelular">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="celularActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textcelularActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel6">
@@ -205,17 +205,17 @@
         <Property name="text" type="java.lang.String" value="direccion"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JTextField" name="direccion">
+    <Component class="javax.swing.JTextField" name="textdireccion">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="direccionActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textdireccionActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Guaradar">
+    <Component class="javax.swing.JButton" name="btnGuardar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Guardar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="GuaradarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accionbtnbtnGuardar"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="Buscar">
@@ -226,30 +226,30 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuscarActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="BuscarCliente">
+    <Component class="javax.swing.JTextField" name="textBuscarCliente">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="BuscarClienteActionPerformed"/>
+        <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="buscarClienteKeyTyped"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Eliminar">
+    <Component class="javax.swing.JButton" name="btnEliminar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Eliminar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="EliminarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accionbtnbtnEliminar"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="Actualizar">
+    <Component class="javax.swing.JButton" name="btnActualizar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Actualizar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ActualizarActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="accionbtnActualizar"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="cedula">
+    <Component class="javax.swing.JTextField" name="textcedula">
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cedulaActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textcedulaActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
@@ -264,17 +264,24 @@
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
       <SubComponents>
-        <Component class="javax.swing.JTable" name="jTable1">
+        <Component class="javax.swing.JTable" name="tablaCliente">
           <Properties>
             <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-              <Table columnCount="4" rowCount="4">
-                <Column editable="true" title="Title 1" type="java.lang.Object"/>
-                <Column editable="true" title="Title 2" type="java.lang.Object"/>
-                <Column editable="true" title="Title 3" type="java.lang.Object"/>
-                <Column editable="true" title="Title 4" type="java.lang.Object"/>
+              <Table columnCount="8" rowCount="8">
+                <Column editable="false" title="idCliente" type="java.lang.Object"/>
+                <Column editable="false" title="primer_nombre" type="java.lang.Object"/>
+                <Column editable="false" title="segundo_nombre" type="java.lang.Object"/>
+                <Column editable="false" title="primer_apellido" type="java.lang.Object"/>
+                <Column editable="false" title="Segundo_apellido" type="java.lang.Object"/>
+                <Column editable="false" title="celular" type="java.lang.Object"/>
+                <Column editable="false" title="direccion" type="java.lang.Object"/>
+                <Column editable="false" title="cedula" type="java.lang.Object"/>
               </Table>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="tablaClienteMouseClicked"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

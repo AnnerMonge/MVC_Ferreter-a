@@ -3,20 +3,48 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Vista;
-
+import Controlador.ProductoControlador;
+import Modelo.Producto;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
 /**
  *
  * @author COMPHP
  */
 public class VistaProductos extends javax.swing.JPanel {
-
+     private final ProductoControlador productoControlador;
+    private Integer idProductoSeleccionado = null;
     /**
      * Creates new form VistaProductos
      */
     public VistaProductos() {
         initComponents();
+         this.productoControlador = new ProductoControlador();
+        cargarDatosTabla();
     }
 
+   public void cargarDatosTabla() {
+        //Obtener todas las categorias del controlador
+        List<Producto> productos = productoControlador.obtenerTodosProductos();
+        if (productos != null) {
+            // obtener el modelo existente de la tabla
+            DefaultTableModel model = (DefaultTableModel) tablaProducto.getModel();
+            model.setRowCount(0);
+            //llenar las filas con los datos de categorias  
+            for (Producto prod : productos) {
+                Object[] row = {
+                    prod.getIdProducto(),
+                    prod.getNombreProducto(),
+                    prod.getDescripcionProducto(),
+                    prod.getIdCategoria(),
+                    prod.getPrecioUnitario(),
+                    prod.getStock(),
+                    prod.getImagen()
+                };
+                model.addRow(row);
+            }
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,60 +55,54 @@ public class VistaProductos extends javax.swing.JPanel {
     private void initComponents() {
 
         jlabel1 = new javax.swing.JLabel();
-        nombre_producto = new javax.swing.JTextField();
+        textNombreProducto = new javax.swing.JTextField();
         jlabel2 = new javax.swing.JLabel();
-        descripcion_producto = new javax.swing.JTextField();
+        textDescripcionProducto = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        id_categoria = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        precio_unitario = new javax.swing.JTextField();
-        stock = new javax.swing.JTextField();
+        textPrecioUnitario = new javax.swing.JTextField();
+        textstock = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        imagen = new javax.swing.JTextField();
+        textimagen = new javax.swing.JTextField();
         Guardar = new javax.swing.JButton();
         Actualizar = new javax.swing.JButton();
         Eliminar = new javax.swing.JButton();
         Buscar = new javax.swing.JButton();
         BuscarProducto = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tablaProducto = new javax.swing.JTable();
+        textidCategoria = new javax.swing.JComboBox<>();
 
         jlabel1.setText("nombre_producto");
 
-        nombre_producto.addActionListener(new java.awt.event.ActionListener() {
+        textNombreProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                nombre_productoActionPerformed(evt);
+                textNombreProductoActionPerformed(evt);
             }
         });
 
         jlabel2.setText("descripcion_producto");
 
-        descripcion_producto.addActionListener(new java.awt.event.ActionListener() {
+        textDescripcionProducto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                descripcion_productoActionPerformed(evt);
+                textDescripcionProductoActionPerformed(evt);
             }
         });
 
         jLabel3.setText("id_categoria");
 
-        id_categoria.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                id_categoriaActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("precio_unitario");
 
-        precio_unitario.addActionListener(new java.awt.event.ActionListener() {
+        textPrecioUnitario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                precio_unitarioActionPerformed(evt);
+                textPrecioUnitarioActionPerformed(evt);
             }
         });
 
-        stock.addActionListener(new java.awt.event.ActionListener() {
+        textstock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                stockActionPerformed(evt);
+                textstockActionPerformed(evt);
             }
         });
 
@@ -88,16 +110,16 @@ public class VistaProductos extends javax.swing.JPanel {
 
         jLabel6.setText("imagen");
 
-        imagen.addActionListener(new java.awt.event.ActionListener() {
+        textimagen.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                imagenActionPerformed(evt);
+                textimagenActionPerformed(evt);
             }
         });
 
         Guardar.setText("Guardar");
         Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                GuardarActionPerformed(evt);
+                accionbtnGuardar(evt);
             }
         });
 
@@ -128,7 +150,7 @@ public class VistaProductos extends javax.swing.JPanel {
             }
         });
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProducto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -139,7 +161,13 @@ public class VistaProductos extends javax.swing.JPanel {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tablaProducto);
+
+        textidCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                textidCategoriaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
@@ -150,28 +178,31 @@ public class VistaProductos extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(stock, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textstock, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(nombre_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jlabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(descripcion_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textDescripcionProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jlabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(id_categoria, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGap(18, 18, 18)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(precio_unitario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(6, 6, 6)
+                                        .addComponent(textidCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(69, 69, 69)
+                                        .addComponent(textPrecioUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(14, 14, 14)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(textimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(139, 139, 139)
                                 .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -193,30 +224,29 @@ public class VistaProductos extends javax.swing.JPanel {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(textDescripcionProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(textidCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jlabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(textNombreProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(id_categoria, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(precio_unitario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jlabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(descripcion_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(jlabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(nombre_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(textPrecioUnitario, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(29, 29, 29)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(stock, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(textstock, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -226,7 +256,7 @@ public class VistaProductos extends javax.swing.JPanel {
                                 .addGap(18, 18, 18)
                                 .addComponent(Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(7, 7, 7)
-                        .addComponent(imagen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(textimagen, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(10, 10, 10)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -239,33 +269,42 @@ public class VistaProductos extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void nombre_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_productoActionPerformed
+    private void textNombreProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombreProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_nombre_productoActionPerformed
+    }//GEN-LAST:event_textNombreProductoActionPerformed
 
-    private void descripcion_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descripcion_productoActionPerformed
+    private void textDescripcionProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textDescripcionProductoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_descripcion_productoActionPerformed
+    }//GEN-LAST:event_textDescripcionProductoActionPerformed
 
-    private void id_categoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_id_categoriaActionPerformed
+    private void textPrecioUnitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPrecioUnitarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_id_categoriaActionPerformed
+    }//GEN-LAST:event_textPrecioUnitarioActionPerformed
 
-    private void precio_unitarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_precio_unitarioActionPerformed
+    private void textstockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textstockActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_precio_unitarioActionPerformed
+    }//GEN-LAST:event_textstockActionPerformed
 
-    private void stockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_stockActionPerformed
+    private void textimagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textimagenActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_stockActionPerformed
+    }//GEN-LAST:event_textimagenActionPerformed
 
-    private void imagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imagenActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_imagenActionPerformed
-
-    private void GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_GuardarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_GuardarActionPerformed
+    private void accionbtnGuardar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnGuardar
+        String NombreProducto = textNombreProducto.getText();
+        String descripcionProducto = textDescripcionProducto.getText();
+        String idCategoria = textidCategoria.toString();
+        String precio
+        
+        
+        if (!nombre.isEmpty() && !descripcion.isEmpty()) {
+            categoriaControlador.crearCategoria(nombre, descripcion);
+            cargarDatosTabla();
+            textNombreCategoria.setText("");
+            textDescripcionCategoria.setText("");
+        } else {            
+            javax.swing.JOptionPane.showMessageDialog(this, "por favor, llene todos los campos.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_accionbtnGuardar
 
     private void ActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ActualizarActionPerformed
         // TODO add your handling code here:
@@ -283,6 +322,10 @@ public class VistaProductos extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_BuscarProductoActionPerformed
 
+    private void textidCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textidCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_textidCategoriaActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Actualizar;
@@ -290,19 +333,19 @@ public class VistaProductos extends javax.swing.JPanel {
     private javax.swing.JTextField BuscarProducto;
     private javax.swing.JButton Eliminar;
     private javax.swing.JButton Guardar;
-    private javax.swing.JTextField descripcion_producto;
-    private javax.swing.JTextField id_categoria;
-    private javax.swing.JTextField imagen;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JLabel jlabel1;
     private javax.swing.JLabel jlabel2;
-    private javax.swing.JTextField nombre_producto;
-    private javax.swing.JTextField precio_unitario;
-    private javax.swing.JTextField stock;
+    private javax.swing.JTable tablaProducto;
+    private javax.swing.JTextField textDescripcionProducto;
+    private javax.swing.JTextField textNombreProducto;
+    private javax.swing.JTextField textPrecioUnitario;
+    private javax.swing.JComboBox<String> textidCategoria;
+    private javax.swing.JTextField textimagen;
+    private javax.swing.JTextField textstock;
     // End of variables declaration//GEN-END:variables
 }
