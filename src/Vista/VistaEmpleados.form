@@ -29,7 +29,6 @@
                                   <Component id="textprimer_nombre" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                                   <Component id="jlabel1" alignment="1" min="-2" pref="160" max="-2" attributes="0"/>
                               </Group>
-                              <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Group type="102" alignment="0" attributes="0">
                                       <Group type="103" groupAlignment="1" attributes="0">
@@ -141,11 +140,13 @@
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="textBuscar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" attributes="0">
                   <Component id="btnActualizar" alignment="0" min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="btnEliminar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
-                  <Component id="Limpiar" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="textBuscar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="btnEliminar" alignment="3" min="-2" pref="31" max="-2" attributes="0"/>
+                      <Component id="Limpiar" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                  </Group>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jScrollPane1" pref="162" max="32767" attributes="0"/>
@@ -220,6 +221,7 @@
     </Component>
     <Component class="javax.swing.JTextField" name="textBuscar">
       <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="textBuscarActionPerformed"/>
         <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="texttextBuscarKeyTyped"/>
       </Events>
     </Component>
