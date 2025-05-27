@@ -42,14 +42,23 @@ public class ClienteControlador {
     }
 
     // Método para obtener todos los clientes
-    public List<Cliente> obtenerTodosClientes() {
-        try {
-            return clienteDAO.leerTodosClientes();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, "Error al leer los clientes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-            return null;
-        }
+public List<Cliente> obtenerTodosClientes() {
+    try {
+        return clienteDAO.leerTodosClientes();
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al leer los clientes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        return null;
     }
+}
+// Método para obtener todos los clientes
+public Cliente obtenerClientePorId(int idCliente) {
+    try {
+        return clienteDAO.obtenerClientePorId( idCliente);
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, "Error al leer los clientes: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        return null;
+    }
+}
 
     // Método para actualizar un cliente existente
     public void actualizarCliente(int idCliente, String primerNombre, String segundoNombre, String primerApellido,
@@ -80,6 +89,8 @@ public class ClienteControlador {
             JOptionPane.showMessageDialog(null, "Error al eliminar el cliente: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    
 
     // Método main para pruebas
     public static void main(String[] args) {
