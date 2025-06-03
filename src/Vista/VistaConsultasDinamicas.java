@@ -23,6 +23,11 @@ public class VistaConsultasDinamicas extends javax.swing.JPanel {
             new Object[][]{},
             new String[]{}
         ));
+        textConsulta.addKeyListener(new java.awt.event.KeyAdapter() {
+    public void keyPressed(java.awt.event.KeyEvent evt) {
+        textConsultaKeyPressed(evt);
+    }
+});
     }
 
     /**
@@ -55,6 +60,12 @@ public class VistaConsultasDinamicas extends javax.swing.JPanel {
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 accionbtnLimpiar(evt);
+            }
+        });
+
+        textConsulta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                textConsultaKeyPressed(evt);
             }
         });
 
@@ -153,6 +164,19 @@ public class VistaConsultasDinamicas extends javax.swing.JPanel {
             new String[]{}
         ));
     }//GEN-LAST:event_accionbtnLimpiar
+
+    private void textConsultaKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textConsultaKeyPressed
+        // TODO add your handling code here:
+        if (evt.getKeyCode() == java.awt.event.KeyEvent.VK_ENTER) { // Detectar Enter
+        String consultaNatural = textConsulta.getText().trim();
+
+        if (!consultaNatural.isEmpty()) {
+            accionBotonConsultar(null); // Llama al método de consulta
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese una consulta.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    }//GEN-LAST:event_textConsultaKeyPressed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
