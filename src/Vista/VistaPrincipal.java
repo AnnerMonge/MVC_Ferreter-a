@@ -37,7 +37,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         opciones = new javax.swing.JTabbedPane();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Ferreteria y se Perdio");
+        setTitle("Ferreteria");
         setResizable(false);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
