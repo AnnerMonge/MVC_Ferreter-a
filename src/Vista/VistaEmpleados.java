@@ -535,7 +535,7 @@ public class VistaEmpleados extends javax.swing.JPanel {
         .setTextAlignment(TextAlignment.CENTER)
         .setFontSize(12));
         
-        Table tabla = new Table(3);
+        Table tabla = new Table(8);
         tabla.setWidth(UnitValue.createPercentValue(100));
         tabla.addHeaderCell("ID Cliente").setBold();
         tabla.addHeaderCell("primer_nombre").setBold();

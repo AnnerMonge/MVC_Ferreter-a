@@ -510,7 +510,7 @@ public class VistaClientes extends javax.swing.JPanel {
     }//GEN-LAST:event_buscarClienteKeyTyped
 
     private void accionbtnReporte(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnReporte
-        // TODO add your handling code here:
+
         //logica para generar reporte pdf
         try {
             FileDialog dialogoArchivo = new FileDialog((java.awt.Frame) null, "Guardar Reporte PDF",FileDialog.SAVE);
@@ -539,7 +539,7 @@ public class VistaClientes extends javax.swing.JPanel {
         .setTextAlignment(TextAlignment.CENTER)
         .setFontSize(12));
         
-        Table tabla = new Table(3);
+        Table tabla = new Table(8);
         tabla.setWidth(UnitValue.createPercentValue(100));
         tabla.addHeaderCell("ID Cliente").setBold();
         tabla.addHeaderCell("primer_nombre").setBold();

@@ -636,7 +636,7 @@ public class VistaProductos extends javax.swing.JPanel {
         .setTextAlignment(TextAlignment.CENTER)
         .setFontSize(12));
         
-        Table tabla = new Table(3);
+        Table tabla = new Table(7);
         tabla.setWidth(UnitValue.createPercentValue(100));
         tabla.addHeaderCell("ID Producto").setBold();
         tabla.addHeaderCell("nombre_producto").setBold();

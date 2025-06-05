@@ -20,6 +20,15 @@ import java.util.TimeZone;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.Timer;
+
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.TextAlignment;
+import com.itextpdf.layout.property.UnitValue;
+import java.awt.FileDialog;
 /**
  *
  * @author COMPHP
@@ -209,6 +218,7 @@ private void eventoComboProductos() {
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaCompras = new javax.swing.JTable();
         btnGuardar = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         btnLimpiar.setText("Limpiar");
         btnLimpiar.addActionListener(new java.awt.event.ActionListener() {
@@ -354,6 +364,13 @@ private void eventoComboProductos() {
             }
         });
 
+        jButton1.setText("Generar Reporte");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                accionbtnReportes(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
@@ -362,7 +379,9 @@ private void eventoComboProductos() {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 226, Short.MAX_VALUE)
+                        .addGap(50, 50, 50)
+                        .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 119, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -419,7 +438,7 @@ private void eventoComboProductos() {
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 12, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -460,7 +479,8 @@ private void eventoComboProductos() {
                     .addComponent(btnLimpiar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnEliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnActualizar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(btnGuardar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(33, 33, 33))
         );
     }// </editor-fold>//GEN-END:initComponents
@@ -863,6 +883,76 @@ private void eventoComboProductos() {
         }
     }//GEN-LAST:event_btnGuardaraccionBotonGuardar
 
+    private void accionbtnReportes(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnReportes
+        //logica para generar reporte pdf
+        try {
+            FileDialog dialogoArchivo = new FileDialog((java.awt.Frame) null, "Guardar Reporte PDF",FileDialog.SAVE);
+            dialogoArchivo.setFile("ReportesCompras.pdf");
+            dialogoArchivo.setVisible(true);
+            
+        String ruta = dialogoArchivo.getDirectory();
+        String nombreArchivo = dialogoArchivo.getFile();
+        
+        if (ruta == null ||nombreArchivo == null){
+            JOptionPane.showMessageDialog(this, "operacion cancelada", "informacion",JOptionPane.INFORMATION_MESSAGE);
+            return;
+        }
+        String rutaCompleta = ruta + nombreArchivo;
+        
+        PdfWriter escritor = new PdfWriter(rutaCompleta);
+        PdfDocument pdf= new PdfDocument(escritor);
+        Document documento = new Document(pdf);
+        
+        documento.add(new Paragraph("Reportes de Compras")
+        .setTextAlignment(TextAlignment.CENTER)
+        .setFontSize(20)
+        .setBold());
+        
+        documento.add(new Paragraph("Fecha:" + new java.util.Date().toString())
+        .setTextAlignment(TextAlignment.CENTER)
+        .setFontSize(12));
+        
+        Table tabla = new Table(4);
+        tabla.setWidth(UnitValue.createPercentValue(100));
+        tabla.addHeaderCell("ID Compra").setBold();
+        tabla.addHeaderCell("id_empleado").setBold();
+        tabla.addHeaderCell("fecha_compra").setBold();
+        tabla.addHeaderCell("total_compra").setBold();
+        
+        List<Compra> listaCompra =
+        compraControlador.obtenerTodasCompras();
+        if (listaCompra != null){
+            for ( Compra compra : listaCompra){
+                tabla.addCell(String.valueOf(compra .getIdCompra()));
+                tabla.addCell(String.valueOf(compra .getIdEmpleado()));
+                tabla.addCell(String.valueOf(compra .getFechaCompra()));
+                tabla.addCell(String.valueOf(compra .getTotalCompra()));
+                
+            }
+        }
+        documento.add(tabla);
+        
+        documento.add(new Paragraph("Notas: Reportes generado automaticamente desde el sistema.")
+        .setFontSize(10)
+        .setMarginTop(20));
+        
+        documento.close();
+        
+        JOptionPane.showMessageDialog(
+                    this,
+                "Reporte pdf generado con exito en:" + rutaCompleta,
+                "Exito", JOptionPane.INFORMATION_MESSAGE);
+        
+        }catch (Exception e){
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(
+                    this,
+                    "Error al Generar el PDF:" + e.getMessage(),
+                    "Error", JOptionPane.ERROR_MESSAGE );
+        }
+        
+    }//GEN-LAST:event_accionbtnReportes
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Buscar;
@@ -875,6 +965,7 @@ private void eventoComboProductos() {
     private javax.swing.JComboBox<String> comboEmpleados;
     private javax.swing.JComboBox<String> comboProductos;
     private javax.swing.JLabel hora;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
