@@ -21,7 +21,7 @@ public class ProductoDAO {
 
     public void crearProducto(Producto producto) throws SQLException {
         String sql = """
-        INSERT INTO Productos (
+        INSERT INTO Producto (
             nombre_producto, 
             descripcion_producto, 
             id_categoria, 

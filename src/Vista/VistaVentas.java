@@ -32,7 +32,6 @@ import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.UnitValue;
 import java.awt.FileDialog;
 
-
 /**
  *
  * @author COMPHP
@@ -664,7 +663,7 @@ public class VistaVentas extends javax.swing.JPanel {
     }//GEN-LAST:event_accionbtnActualizar
 
     private void accionbtnAgregar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnAgregar
-        
+
         try {
             // Obtener el índice seleccionado del comboProductos
             int indiceSeleccionado = comboProductos.getSelectedIndex();
@@ -956,73 +955,73 @@ public class VistaVentas extends javax.swing.JPanel {
 
     private void accionbtnReportes(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnReportes
 
-           //logica para generar reporte pdf
+        //logica para generar reporte pdf
         try {
-            FileDialog dialogoArchivo = new FileDialog((java.awt.Frame) null, "Guardar Reporte PDF",FileDialog.SAVE);
+            FileDialog dialogoArchivo = new FileDialog((java.awt.Frame) null, "Guardar Reporte PDF", FileDialog.SAVE);
             dialogoArchivo.setFile("ReportesVentas.pdf");
             dialogoArchivo.setVisible(true);
-            
-        String ruta = dialogoArchivo.getDirectory();
-        String nombreArchivo = dialogoArchivo.getFile();
-        
-        if (ruta == null ||nombreArchivo == null){
-            JOptionPane.showMessageDialog(this, "operacion cancelada", "informacion",JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        String rutaCompleta = ruta + nombreArchivo;
-        
-        PdfWriter escritor = new PdfWriter(rutaCompleta);
-        PdfDocument pdf= new PdfDocument(escritor);
-        Document documento = new Document(pdf);
-        
-        documento.add(new Paragraph("Reportes de Ventas")
-        .setTextAlignment(TextAlignment.CENTER)
-        .setFontSize(20)
-        .setBold());
-        
-        documento.add(new Paragraph("Fecha:" + new java.util.Date().toString())
-        .setTextAlignment(TextAlignment.CENTER)
-        .setFontSize(12));
-        
-        Table tabla = new Table(5);
-        tabla.setWidth(UnitValue.createPercentValue(100));
-        tabla.addHeaderCell("ID Venta").setBold();
-        tabla.addHeaderCell("id_cliente").setBold();
-        tabla.addHeaderCell("id_empleado").setBold();
-        tabla.addHeaderCell("fecha_venta").setBold();
-        tabla.addHeaderCell("total_venta").setBold();
-        
-        List<Venta> listaVentas =
-        ventaControlador.obtenerTodasVentas();
-        if (listaVentas != null){
-            for (Venta venta : listaVentas){
-                tabla.addCell(String.valueOf(venta.getIdVenta()));
-                tabla.addCell(String.valueOf(venta.getIdCliente()));
-                tabla.addCell(String.valueOf(venta.getIdEmpleado()));
-                tabla.addCell(String.valueOf(venta.getFechaVenta()));
-                tabla.addCell(String.valueOf(venta.getTotalVenta()));
-                
+
+            String ruta = dialogoArchivo.getDirectory();
+            String nombreArchivo = dialogoArchivo.getFile();
+
+            if (ruta == null || nombreArchivo == null) {
+                JOptionPane.showMessageDialog(this, "operacion cancelada", "informacion", JOptionPane.INFORMATION_MESSAGE);
+                return;
             }
-        }
-        documento.add(tabla);
-        
-        documento.add(new Paragraph("Notas: Reportes generado automaticamente desde el sistema.")
-        .setFontSize(10)
-        .setMarginTop(20));
-        
-        documento.close();
-        
-        JOptionPane.showMessageDialog(
+            String rutaCompleta = ruta + nombreArchivo;
+
+            PdfWriter escritor = new PdfWriter(rutaCompleta);
+            PdfDocument pdf = new PdfDocument(escritor);
+            Document documento = new Document(pdf);
+
+            documento.add(new Paragraph("Reportes de Ventas")
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setFontSize(20)
+                    .setBold());
+
+            documento.add(new Paragraph("Fecha:" + new java.util.Date().toString())
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setFontSize(12));
+
+            Table tabla = new Table(5);
+            tabla.setWidth(UnitValue.createPercentValue(100));
+            tabla.addHeaderCell("ID Venta").setBold();
+            tabla.addHeaderCell("id_cliente").setBold();
+            tabla.addHeaderCell("id_empleado").setBold();
+            tabla.addHeaderCell("fecha_venta").setBold();
+            tabla.addHeaderCell("total_venta").setBold();
+
+            List<Venta> listaVentas
+                    = ventaControlador.obtenerTodasVentas();
+            if (listaVentas != null) {
+                for (Venta venta : listaVentas) {
+                    tabla.addCell(String.valueOf(venta.getIdVenta()));
+                    tabla.addCell(String.valueOf(venta.getIdCliente()));
+                    tabla.addCell(String.valueOf(venta.getIdEmpleado()));
+                    tabla.addCell(String.valueOf(venta.getFechaVenta()));
+                    tabla.addCell(String.valueOf(venta.getTotalVenta()));
+
+                }
+            }
+            documento.add(tabla);
+
+            documento.add(new Paragraph("Notas: Reportes generado automaticamente desde el sistema.")
+                    .setFontSize(10)
+                    .setMarginTop(20));
+
+            documento.close();
+
+            JOptionPane.showMessageDialog(
                     this,
-                "Reporte pdf generado con exito en:" + rutaCompleta,
-                "Exito", JOptionPane.INFORMATION_MESSAGE);
-        
-        }catch (Exception e){
+                    "Reporte pdf generado con exito en:" + rutaCompleta,
+                    "Exito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(
                     this,
                     "Error al Generar el PDF:" + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE );
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_accionbtnReportes
 

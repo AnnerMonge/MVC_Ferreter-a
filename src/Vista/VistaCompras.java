@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package Vista;
+
 import Controlador.CompraControlador;
 import Modelo.Compra;
 import Controlador.DetalleCompraControlador;
@@ -29,11 +30,13 @@ import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.UnitValue;
 import java.awt.FileDialog;
+
 /**
  *
  * @author COMPHP
  */
 public class VistaCompras extends javax.swing.JPanel {
+
     private final CompraControlador compraControlador;
     private final DetalleCompraControlador detalleCompraControlador;
     private final EmpleadoControlador empleadoControlador;
@@ -41,150 +44,157 @@ public class VistaCompras extends javax.swing.JPanel {
 
     private Integer idEmpleadoSeleccionado = null;
     private Integer idProductoSeleccionado = null;
-    
+
     private Timer timer; // Variable de instancia para el Timer
     private boolean horabd = false;
+
     /**
      * Creates new form VistaCompra
      */
     public VistaCompras() {
         initComponents();
         this.compraControlador = new CompraControlador();
-    this.detalleCompraControlador = new DetalleCompraControlador();
-    this.empleadoControlador = new EmpleadoControlador();
-    this.productoControlador = new ProductoControlador();
-    eventoComboProductos();
+        this.detalleCompraControlador = new DetalleCompraControlador();
+        this.empleadoControlador = new EmpleadoControlador();
+        this.productoControlador = new ProductoControlador();
+        eventoComboProductos();
 
-    selectorfechaCompra.setDate(new Date());
-    ((JTextField) selectorfechaCompra.getDateEditor().getUiComponent()).setEditable(false);
+        selectorfechaCompra.setDate(new Date());
+        ((JTextField) selectorfechaCompra.getDateEditor().getUiComponent()).setEditable(false);
 
-    // Limpiar las filas vacías de tablaDetalles
-    DefaultTableModel modelDetalles = (DefaultTableModel) tablaDetalles.getModel();
-    modelDetalles.setRowCount(0);
+        // Limpiar las filas vacías de tablaDetalles
+        DefaultTableModel modelDetalles = (DefaultTableModel) tablaDetalles.getModel();
+        modelDetalles.setRowCount(0);
 
-    cargarDatosTablaCompras();
-    cargarEmpleados();
-    cargarProductos();
-    actualizarHora();
+        cargarDatosTablaCompras();
+        cargarEmpleados();
+        cargarProductos();
+        actualizarHora();
     }
+
     private void limpiar() {
-    textBuscar.setText("");
-    idEmpleadoSeleccionado = null;
-    selectorfechaCompra.setDate(new Date());
+        textBuscar.setText("");
+        idEmpleadoSeleccionado = null;
+        selectorfechaCompra.setDate(new Date());
 
-    // Limpiar la tabla de detalles
-    tablaDetalles.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"ID Producto", "Producto", "Precio Unitario", "Cantidad", "Subtotal"}));
+        // Limpiar la tabla de detalles
+        tablaDetalles.setModel(new DefaultTableModel(new Object[][]{}, new String[]{"ID Producto", "Producto", "Precio Unitario", "Cantidad", "Subtotal"}));
 
-    cargarDatosTablaCompras();
-    cargarEmpleados();
-    cargarProductos();
+        cargarDatosTablaCompras();
+        cargarEmpleados();
+        cargarProductos();
 
-    btnEliminar.setEnabled(true);
-    btnGuardar.setEnabled(true);
+        btnEliminar.setEnabled(true);
+        btnGuardar.setEnabled(true);
 
-    horabd = false; // Restablece para mostrar hora actual
-    actualizarHora(); // Vuelve a iniciar el timer
-}
+        horabd = false; // Restablece para mostrar hora actual
+        actualizarHora(); // Vuelve a iniciar el timer
+    }
+
     private void actualizarHora() {
-    SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
-    sdf.setTimeZone(TimeZone.getTimeZone("America/Managua"));
+        SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
+        sdf.setTimeZone(TimeZone.getTimeZone("America/Managua"));
 
-    // Detener el timer anterior si existe
-    if (timer != null) {
-        timer.stop();
-    }
-
-    if (horabd) {
-        return; // No actualiza la hora si está cargada desde la base de datos
-    }
-
-    timer = new Timer(1000, e -> {
-        Date now = new Date();
-        hora.setText(sdf.format(now));
-    });
-    timer.start();
-}
-private void cargarDatosTablaCompras() {
-    List<Compra> compras = compraControlador.obtenerTodasCompras();
-
-    if (compras != null) {
-
-        DefaultTableModel model = (DefaultTableModel) tablaCompras.getModel();
-        model.setRowCount(0);
-
-        for (Compra c : compras) {
-
-            Empleado empleado = empleadoControlador.obtenerEmpleadoPorId(c.getIdEmpleado());
-            String nombreEmpleado = empleado.getPrimerNombre() + " " + empleado.getPrimerApellido();
-
-            Object[] row = {
-                c.getIdCompra(),
-                c.getFechaCompra(),
-                nombreEmpleado,
-                c.getTotalCompra()
-            };
-            model.addRow(row);
+        // Detener el timer anterior si existe
+        if (timer != null) {
+            timer.stop();
         }
-    }
-}
-private void cargarEmpleados() {
-    try {
-        // Obtener las categorías desde el controlador
-        List<Empleado> empleados = empleadoControlador.obtenerTodosEmpleados();
 
-        // Limpiar el combo box por si tiene datos
-        comboEmpleados.removeAllItems();
-
-        // Agregar cada categoría al combo box
-        for (Empleado e : empleados) {
-            comboEmpleados.addItem(e.getPrimerNombre() + " " +e.getPrimerApellido()); // Mostrar el nombre
+        if (horabd) {
+            return; // No actualiza la hora si está cargada desde la base de datos
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, 
-                "Error al cargar los empleados: " + e.getMessage());
+
+        timer = new Timer(1000, e -> {
+            Date now = new Date();
+            hora.setText(sdf.format(now));
+        });
+        timer.start();
     }
-}
-private void cargarProductos() {
-    try {
-        // Obtener las categorías desde el controlador
-        List<Producto> productos = productoControlador.obtenerTodosProductos();
 
-        // Limpiar el combo box por si tiene datos
-        comboProductos.removeAllItems();
+    private void cargarDatosTablaCompras() {
+        List<Compra> compras = compraControlador.obtenerTodasCompras();
 
-        // Agregar cada categoría al combo box
-        for (Producto p : productos) {
-            comboProductos.addItem(p.getNombreProducto()); // Mostrar el nombre
-        }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(this, 
-                "Error al cargar los productos: " + e.getMessage());
-    }
-}
-private void eventoComboProductos() {
-    comboProductos.addActionListener(e -> {
-        // Obtener el índice seleccionado
-        int indiceSeleccionado = comboProductos.getSelectedIndex();
+        if (compras != null) {
 
-        if (indiceSeleccionado >= 0) { // Verificar que se haya seleccionado algo
-            try {
-                // Obtener la lista de categorías desde el controlador o memoria
-                List<Producto> productos = productoControlador.obtenerTodosProductos();
+            DefaultTableModel model = (DefaultTableModel) tablaCompras.getModel();
+            model.setRowCount(0);
 
-                // Obtener el objeto de categoría correspondiente al índice seleccionado
-                Producto productoSeleccionado = productos.get(indiceSeleccionado);
+            for (Compra c : compras) {
 
-                // Actualizar la variable global con el ID de la categoría seleccionada
-                idProductoSeleccionado = productoSeleccionado.getIdProducto();
-                
-                // Actualizar el campo textPrecio con el precio unitario del producto
-                textPrecio.setText(String.valueOf(productoSeleccionado.getPrecioUnitario()));
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Error al seleccionar categoría: " + ex.getMessage());
+                Empleado empleado = empleadoControlador.obtenerEmpleadoPorId(c.getIdEmpleado());
+                String nombreEmpleado = empleado.getPrimerNombre() + " " + empleado.getPrimerApellido();
+
+                Object[] row = {
+                    c.getIdCompra(),
+                    c.getFechaCompra(),
+                    nombreEmpleado,
+                    c.getTotalCompra()
+                };
+                model.addRow(row);
             }
         }
-    });
-}
+    }
+
+    private void cargarEmpleados() {
+        try {
+            // Obtener las categorías desde el controlador
+            List<Empleado> empleados = empleadoControlador.obtenerTodosEmpleados();
+
+            // Limpiar el combo box por si tiene datos
+            comboEmpleados.removeAllItems();
+
+            // Agregar cada categoría al combo box
+            for (Empleado e : empleados) {
+                comboEmpleados.addItem(e.getPrimerNombre() + " " + e.getPrimerApellido()); // Mostrar el nombre
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Error al cargar los empleados: " + e.getMessage());
+        }
+    }
+
+    private void cargarProductos() {
+        try {
+            // Obtener las categorías desde el controlador
+            List<Producto> productos = productoControlador.obtenerTodosProductos();
+
+            // Limpiar el combo box por si tiene datos
+            comboProductos.removeAllItems();
+
+            // Agregar cada categoría al combo box
+            for (Producto p : productos) {
+                comboProductos.addItem(p.getNombreProducto()); // Mostrar el nombre
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this,
+                    "Error al cargar los productos: " + e.getMessage());
+        }
+    }
+
+    private void eventoComboProductos() {
+        comboProductos.addActionListener(e -> {
+            // Obtener el índice seleccionado
+            int indiceSeleccionado = comboProductos.getSelectedIndex();
+
+            if (indiceSeleccionado >= 0) { // Verificar que se haya seleccionado algo
+                try {
+                    // Obtener la lista de categorías desde el controlador o memoria
+                    List<Producto> productos = productoControlador.obtenerTodosProductos();
+
+                    // Obtener el objeto de categoría correspondiente al índice seleccionado
+                    Producto productoSeleccionado = productos.get(indiceSeleccionado);
+
+                    // Actualizar la variable global con el ID de la categoría seleccionada
+                    idProductoSeleccionado = productoSeleccionado.getIdProducto();
+
+                    // Actualizar el campo textPrecio con el precio unitario del producto
+                    textPrecio.setText(String.valueOf(productoSeleccionado.getPrecioUnitario()));
+                } catch (Exception ex) {
+                    JOptionPane.showMessageDialog(this, "Error al seleccionar categoría: " + ex.getMessage());
+                }
+            }
+        });
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -360,7 +370,7 @@ private void eventoComboProductos() {
         btnGuardar.setText("GuardaCompra");
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnGuardaraccionBotonGuardar(evt);
+                accionBotonGuardar(evt);
             }
         });
 
@@ -579,7 +589,7 @@ private void eventoComboProductos() {
 
     private void textBuscarKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_textBuscarKeyTyped
         // TODO add your handling code here:
-          String textoBusqueda = textBuscar.getText().trim().toLowerCase();
+        String textoBusqueda = textBuscar.getText().trim().toLowerCase();
         List<Compra> compras = compraControlador.obtenerTodasCompras();
 
         DefaultTableModel modelo = (DefaultTableModel) tablaCompras.getModel();
@@ -589,9 +599,9 @@ private void eventoComboProductos() {
             for (Compra c : compras) {
                 Empleado empleado = empleadoControlador.obtenerEmpleadoPorId(c.getIdEmpleado());
                 String nombreEmpleado = empleado.getPrimerNombre() + " " + empleado.getPrimerApellido();
-                
-                if (textoBusqueda.isEmpty() ||
-                    nombreEmpleado.toLowerCase().contains(textoBusqueda)) {
+
+                if (textoBusqueda.isEmpty()
+                        || nombreEmpleado.toLowerCase().contains(textoBusqueda)) {
                     Object[] fila = {
                         c.getIdCompra(),
                         c.getFechaCompra(),
@@ -623,9 +633,9 @@ private void eventoComboProductos() {
 
             // Confirmar con el usuario antes de eliminar
             int confirmacion = JOptionPane.showConfirmDialog(this,
-                "¿Está seguro de que desea eliminar la venta con ID " + idCompra + "?",
-                "Confirmar Eliminación",
-                JOptionPane.YES_NO_OPTION);
+                    "¿Está seguro de que desea eliminar la venta con ID " + idCompra + "?",
+                    "Confirmar Eliminación",
+                    JOptionPane.YES_NO_OPTION);
             if (confirmacion == JOptionPane.YES_OPTION) {
                 // Eliminar la venta
                 compraControlador.eliminarCompra(idCompra);
@@ -641,7 +651,7 @@ private void eventoComboProductos() {
 
     private void accionbtnActualizar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnActualizar
         // TODO add your handling code here:
-         try {
+        try {
             // Obtener el índice de la fila seleccionada en tablaVentas
             int filaSeleccionada = tablaCompras.getSelectedRow();
             if (filaSeleccionada == -1) {
@@ -655,7 +665,7 @@ private void eventoComboProductos() {
 
             // Obtener el índice seleccionado de empleados
             int indiceEmpleado = comboEmpleados.getSelectedIndex();
-            if ( indiceEmpleado < 0) {
+            if (indiceEmpleado < 0) {
                 JOptionPane.showMessageDialog(this, "Seleccione un empleado.", "Error", JOptionPane.ERROR_MESSAGE);
                 return;
             }
@@ -730,13 +740,13 @@ private void eventoComboProductos() {
 
     private void tablaComprasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tablaComprasMouseClicked
         // Verificar si es un doble clic
-         // Verificar si es un doble clic
+        // Verificar si es un doble clic
         if (evt.getClickCount() == 2) {
             try {
-                
+
                 btnEliminar.setEnabled(false);
                 btnGuardar.setEnabled(false);
-                
+
                 // Obtener el índice de la fila seleccionada en tablaCompras
                 int filaSeleccionada = tablaCompras.getSelectedRow();
                 if (filaSeleccionada == -1) {
@@ -777,12 +787,12 @@ private void eventoComboProductos() {
                     JOptionPane.showMessageDialog(this, "Empleado no encontrado.", "Error", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                
+
                 // Detener el timer actual
                 if (timer != null) {
                     timer.stop();
                 }
-                
+
                 // Asignar la hora al label
                 horabd = true;
                 java.text.SimpleDateFormat horaFormato = new java.text.SimpleDateFormat("HH:mm:ss");
@@ -822,7 +832,7 @@ private void eventoComboProductos() {
 
     }//GEN-LAST:event_tablaComprasMouseClicked
 
-    private void btnGuardaraccionBotonGuardar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardaraccionBotonGuardar
+    private void accionBotonGuardar(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionBotonGuardar
         // TODO add your handling code here:
         try {
             // Obtener el índice seleccionado de empleados
@@ -881,76 +891,76 @@ private void eventoComboProductos() {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar la compra: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_btnGuardaraccionBotonGuardar
+    }//GEN-LAST:event_accionBotonGuardar
 
     private void accionbtnReportes(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_accionbtnReportes
         //logica para generar reporte pdf
         try {
-            FileDialog dialogoArchivo = new FileDialog((java.awt.Frame) null, "Guardar Reporte PDF",FileDialog.SAVE);
+            FileDialog dialogoArchivo = new FileDialog((java.awt.Frame) null, "Guardar Reporte PDF", FileDialog.SAVE);
             dialogoArchivo.setFile("ReportesCompras.pdf");
             dialogoArchivo.setVisible(true);
-            
-        String ruta = dialogoArchivo.getDirectory();
-        String nombreArchivo = dialogoArchivo.getFile();
-        
-        if (ruta == null ||nombreArchivo == null){
-            JOptionPane.showMessageDialog(this, "operacion cancelada", "informacion",JOptionPane.INFORMATION_MESSAGE);
-            return;
-        }
-        String rutaCompleta = ruta + nombreArchivo;
-        
-        PdfWriter escritor = new PdfWriter(rutaCompleta);
-        PdfDocument pdf= new PdfDocument(escritor);
-        Document documento = new Document(pdf);
-        
-        documento.add(new Paragraph("Reportes de Compras")
-        .setTextAlignment(TextAlignment.CENTER)
-        .setFontSize(20)
-        .setBold());
-        
-        documento.add(new Paragraph("Fecha:" + new java.util.Date().toString())
-        .setTextAlignment(TextAlignment.CENTER)
-        .setFontSize(12));
-        
-        Table tabla = new Table(4);
-        tabla.setWidth(UnitValue.createPercentValue(100));
-        tabla.addHeaderCell("ID Compra").setBold();
-        tabla.addHeaderCell("id_empleado").setBold();
-        tabla.addHeaderCell("fecha_compra").setBold();
-        tabla.addHeaderCell("total_compra").setBold();
-        
-        List<Compra> listaCompra =
-        compraControlador.obtenerTodasCompras();
-        if (listaCompra != null){
-            for ( Compra compra : listaCompra){
-                tabla.addCell(String.valueOf(compra .getIdCompra()));
-                tabla.addCell(String.valueOf(compra .getIdEmpleado()));
-                tabla.addCell(String.valueOf(compra .getFechaCompra()));
-                tabla.addCell(String.valueOf(compra .getTotalCompra()));
-                
+
+            String ruta = dialogoArchivo.getDirectory();
+            String nombreArchivo = dialogoArchivo.getFile();
+
+            if (ruta == null || nombreArchivo == null) {
+                JOptionPane.showMessageDialog(this, "operacion cancelada", "informacion", JOptionPane.INFORMATION_MESSAGE);
+                return;
             }
-        }
-        documento.add(tabla);
-        
-        documento.add(new Paragraph("Notas: Reportes generado automaticamente desde el sistema.")
-        .setFontSize(10)
-        .setMarginTop(20));
-        
-        documento.close();
-        
-        JOptionPane.showMessageDialog(
+            String rutaCompleta = ruta + nombreArchivo;
+
+            PdfWriter escritor = new PdfWriter(rutaCompleta);
+            PdfDocument pdf = new PdfDocument(escritor);
+            Document documento = new Document(pdf);
+
+            documento.add(new Paragraph("Reportes de Compras")
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setFontSize(20)
+                    .setBold());
+
+            documento.add(new Paragraph("Fecha:" + new java.util.Date().toString())
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setFontSize(12));
+
+            Table tabla = new Table(4);
+            tabla.setWidth(UnitValue.createPercentValue(100));
+            tabla.addHeaderCell("ID Compra").setBold();
+            tabla.addHeaderCell("id_empleado").setBold();
+            tabla.addHeaderCell("fecha_compra").setBold();
+            tabla.addHeaderCell("total_compra").setBold();
+
+            List<Compra> listaCompra
+                    = compraControlador.obtenerTodasCompras();
+            if (listaCompra != null) {
+                for (Compra compra : listaCompra) {
+                    tabla.addCell(String.valueOf(compra.getIdCompra()));
+                    tabla.addCell(String.valueOf(compra.getIdEmpleado()));
+                    tabla.addCell(String.valueOf(compra.getFechaCompra()));
+                    tabla.addCell(String.valueOf(compra.getTotalCompra()));
+
+                }
+            }
+            documento.add(tabla);
+
+            documento.add(new Paragraph("Notas: Reportes generado automaticamente desde el sistema.")
+                    .setFontSize(10)
+                    .setMarginTop(20));
+
+            documento.close();
+
+            JOptionPane.showMessageDialog(
                     this,
-                "Reporte pdf generado con exito en:" + rutaCompleta,
-                "Exito", JOptionPane.INFORMATION_MESSAGE);
-        
-        }catch (Exception e){
+                    "Reporte pdf generado con exito en:" + rutaCompleta,
+                    "Exito", JOptionPane.INFORMATION_MESSAGE);
+
+        } catch (Exception e) {
             e.printStackTrace();
             JOptionPane.showMessageDialog(
                     this,
                     "Error al Generar el PDF:" + e.getMessage(),
-                    "Error", JOptionPane.ERROR_MESSAGE );
+                    "Error", JOptionPane.ERROR_MESSAGE);
         }
-        
+
     }//GEN-LAST:event_accionbtnReportes
 
 
