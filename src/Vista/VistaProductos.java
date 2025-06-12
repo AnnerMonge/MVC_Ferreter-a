@@ -653,8 +653,8 @@ public class VistaProductos extends javax.swing.JPanel {
                 tabla.addCell(String.valueOf(producto.getIdProducto()));
                 tabla.addCell(String.valueOf(producto.getNombreProducto()));
                 tabla.addCell(String.valueOf(producto.getDescripcionProducto()));
-                tabla.addCell(String.valueOf(producto.getPrecioUnitario()));
                 tabla.addCell(String.valueOf(producto.getIdCategoria()));
+                tabla.addCell(String.valueOf(producto.getPrecioUnitario()));
                 tabla.addCell(String.valueOf(producto.getStock()));
                 tabla.addCell(String.valueOf(producto.getImagen()));
             }
